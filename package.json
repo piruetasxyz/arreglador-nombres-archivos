@@ -1,6 +1,6 @@
 {
   "name": "arreglador-nombres-archivos",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "GitHub Action for fixing filenames in a repository.",
   "homepage": "https://github.com/piruetasxyz/arreglador-nombres-archivos#readme",
   "bugs": {
