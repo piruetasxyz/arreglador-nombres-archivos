@@ -1,8 +1,8 @@
-# filename-fixer
+# arreglador-nombres-archivos
 
 ## Acerca de
 
-`filename-fixer` es una GitHub Action que detecta (y, si se le pide, corrige) nombres de archivo que no siguen un formato consistente en un repositorio.
+`arreglador-nombres-archivos` es una GitHub Action que detecta (y, si se le pide, corrige) nombres de archivo que no siguen un formato consistente en un repositorio.
 
 ### ¿Qué significa "corregir"?
 
