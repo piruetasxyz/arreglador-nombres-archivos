@@ -27589,21 +27589,22 @@ function walk(dir, fileList = []) {
   return fileList;
 }
 
-function slugify(str) {
+function slugify(str, separator = '-') {
   return str
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/[^a-z0-9]+/g, separator)
+    .replace(/^[-_]+|[-_]+$/g, '');
 }
 
 function normalizeName(filename) {
   if (CONVENTIONAL_NAMES.has(filename.toLowerCase())) return filename;
 
   const ext = path.extname(filename);
+  const separator = ['.ino', '.pde'].includes(ext.toLowerCase()) ? '_' : '-';
   const base = ext ? filename.slice(0, -ext.length) : filename;
-  const fixedBase = slugify(base) || 'archivo';
+  const fixedBase = slugify(base, separator) || 'archivo';
   const fixedExt = ext ? '.' + slugify(ext.slice(1)) : '';
   return fixedBase + fixedExt;
 }

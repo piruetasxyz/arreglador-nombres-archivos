@@ -16,6 +16,8 @@ Si el nombre normalizado difiere del original, se considera un archivo a corregi
 
 Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `AUTHORS.md` y `NOTICE.md` (sin distinguir mayúsculas/minúsculas), que se dejan con su nombre original.
 
+Para archivos `.ino` (sketches de Arduino) y `.pde` (sketches de Processing), los espacios y símbolos se reemplazan por guiones bajos (`_`) en vez de guiones (`-`), ya que estos IDEs no permiten guiones en nombres de sketch: `mi sketch.ino` → `mi_sketch.ino`.
+
 ## Uso
 
 ```yaml
