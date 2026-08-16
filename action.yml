@@ -5,13 +5,15 @@ branding:
   icon: 'file'
   color: 'purple'
 inputs:
-  fix:
-    description: 'fix or not issues automatically'
+  arreglar:
+    description: 'si es true, renombra los archivos automáticamente; si es false, solo detecta y reporta'
     default: 'false'
     required: false
 outputs:
-  time: 
+  time:
     description: 'time taken to fix issues'
+  hay_cambios:
+    description: 'true si se detectaron (o corrigieron) archivos con nombres no normalizados'
 runs:
   using: 'node20'
   main: 'dist/index.js'
