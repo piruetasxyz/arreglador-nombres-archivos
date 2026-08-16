@@ -14,6 +14,8 @@ Para cada archivo del repositorio (sin contar archivos/carpetas ocultos ni `node
 
 Si el nombre normalizado difiere del original, se considera un archivo a corregir. Cuando dos o más archivos de una misma carpeta terminarían con el mismo nombre normalizado (por ejemplo `café.jpg` y `cafe.jpg`), ese renombrado se omite y se reporta como conflicto en vez de sobrescribir un archivo existente.
 
+Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `AUTHORS.md` y `NOTICE.md` (sin distinguir mayúsculas/minúsculas), que se dejan con su nombre original.
+
 ## Uso
 
 ```yaml

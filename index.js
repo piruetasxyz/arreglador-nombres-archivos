@@ -4,6 +4,17 @@ const path = require('path');
 
 const IGNORED_DIR_NAMES = new Set(['node_modules']);
 
+const CONVENTIONAL_NAMES = new Set([
+  'readme', 'readme.md', 'readme.txt',
+  'license', 'license.md', 'license.txt',
+  'changelog', 'changelog.md',
+  'contributing', 'contributing.md',
+  'code_of_conduct.md',
+  'security.md',
+  'authors', 'authors.md',
+  'notice', 'notice.md',
+]);
+
 function isIgnored(name) {
   return name.startsWith('.') || IGNORED_DIR_NAMES.has(name);
 }
@@ -31,6 +42,8 @@ function slugify(str) {
 }
 
 function normalizeName(filename) {
+  if (CONVENTIONAL_NAMES.has(filename.toLowerCase())) return filename;
+
   const ext = path.extname(filename);
   const base = ext ? filename.slice(0, -ext.length) : filename;
   const fixedBase = slugify(base) || 'archivo';
