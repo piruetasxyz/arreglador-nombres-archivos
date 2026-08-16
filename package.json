@@ -1,14 +1,14 @@
 {
-  "name": "filename-fixer",
-  "version": "0.0.1",
+  "name": "arreglador-nombres-archivos",
+  "version": "0.2.0",
   "description": "GitHub Action for fixing filenames in a repository.",
-  "homepage": "https://github.com/piruetasxyz/filename-fixer#readme",
+  "homepage": "https://github.com/piruetasxyz/arreglador-nombres-archivos#readme",
   "bugs": {
-    "url": "https://github.com/piruetasxyz/filename-fixer/issues"
+    "url": "https://github.com/piruetasxyz/arreglador-nombres-archivos/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/piruetasxyz/filename-fixer.git"
+    "url": "git+https://github.com/piruetasxyz/arreglador-nombres-archivos.git"
   },
   "license": "MIT",
   "author": "piruetasxyz",

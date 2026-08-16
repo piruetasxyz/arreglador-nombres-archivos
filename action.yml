@@ -1,4 +1,4 @@
-name: 'filename-fixer'
+name: 'arreglador-nombres-archivos'
 description: 'fixes filenames in a repository'
 author: 'piruetaszyz'
 branding:

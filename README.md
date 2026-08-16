@@ -17,7 +17,7 @@ Si el nombre normalizado difiere del original, se considera un archivo a corregi
 ## Uso
 
 ```yaml
-- uses: piruetasxyz/filename-fixer@main
+- uses: piruetasxyz/arreglador-nombres-archivos@main
   with:
     arreglar: true
 ```
@@ -68,7 +68,7 @@ jobs:
 
       - name: Ejecutar action
         id: nombres
-        uses: piruetasxyz/filename-fixer@v0.1.0
+        uses: piruetasxyz/arreglador-nombres-archivos@v0.2.0
         with:
           arreglar: true
 
