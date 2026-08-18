@@ -104,28 +104,6 @@ function planRenames(rootDir) {
   return { changes, conflicts };
 }
 
-function writeReport(reportPath, changes, conflicts, applied) {
-  const lines = ['### 🔧 Archivos renombrados', ''];
-
-  if (changes.length > 0) {
-    for (const { before, after } of changes) {
-      const suffix = applied ? '' : ' _(pendiente, ejecuta con `arreglar: true`)_';
-      lines.push(`- \`${before}\` → \`${after}\`${suffix}`);
-    }
-  } else {
-    lines.push('_Sin cambios._');
-  }
-
-  if (conflicts.length > 0) {
-    lines.push('', '#### ⚠️ Conflictos (no renombrados)', '');
-    for (const { before, after } of conflicts) {
-      lines.push(`- \`${before}\` → \`${after}\``);
-    }
-  }
-
-  fs.writeFileSync(reportPath, lines.join('\n') + '\n');
-}
-
 try {
   const start = Date.now();
   const shouldFix = core.getBooleanInput('arreglar');
@@ -148,10 +126,6 @@ try {
 
   const hayCambios = changes.length > 0;
   core.setOutput('hay_cambios', hayCambios ? 'true' : 'false');
-
-  if (hayCambios || conflicts.length > 0) {
-    writeReport(path.join(rootDir, 'cambios.txt'), changes, conflicts, shouldFix);
-  }
 
   core.setOutput('time', `${Date.now() - start}ms`);
 } catch (error) {

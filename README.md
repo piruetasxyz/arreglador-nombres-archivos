@@ -41,11 +41,7 @@ Con `arreglar: false` (valor por defecto) la Action solo detecta y reporta los a
 | `hay_cambios` | `true` si se detectaron (o corrigieron) archivos con nombres no normalizados |
 | `time` | Tiempo tomado en corregir problemas |
 
-### Reporte `cambios.txt`
-
-Cuando hay cambios o conflictos, la Action escribe un archivo `cambios.txt` en la raíz del repositorio con el detalle en formato Markdown, listo para usarse como cuerpo de un comentario de PR.
-
-### Ejemplo: corregir y comentar en cada push
+### Ejemplo: corregir en cada push
 
 ```yaml
 permissions:
@@ -63,7 +59,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -76,44 +71,6 @@ jobs:
         with:
           arreglar: true
 
-      - name: Comentar en PR (sin spam)
-        if: steps.nombres.outputs.hay_cambios == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const body = fs.readFileSync('cambios.txt', 'utf8');
-
-            const { owner, repo } = context.repo;
-            const issue_number = context.issue.number;
-
-            const comments = await github.rest.issues.listComments({
-              owner,
-              repo,
-              issue_number
-            });
-
-            const botComment = comments.data.find(c =>
-              c.user.type === 'Bot' &&
-              c.body.includes('### 🔧 Archivos renombrados')
-            );
-
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner,
-                repo,
-                comment_id: botComment.id,
-                body
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number,
-                body
-              });
-            }
-
       - name: Commit cambios
         run: |
           git config user.name "github-actions"
@@ -122,8 +79,6 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: normalizar nombres de archivos"
           git push origin HEAD:${{ github.head_ref || github.ref_name }}
 ```
-
-> El paso "Comentar en PR" usa `context.issue.number`, que solo existe en eventos de pull request. En un workflow disparado por `push` (como el de arriba) ese paso no encontrará un issue/PR al cual comentar; identifícalo desde `context.payload` o dispara el workflow con `pull_request` si necesitas el comentario.
 
 ## Desarrollo
 
