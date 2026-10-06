@@ -18,6 +18,8 @@ Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE
 
 Para archivos `.ino` (sketches de Arduino) y `.pde` (sketches de Processing), los espacios y símbolos se reemplazan por guiones bajos (`_`) en vez de guiones (`-`), ya que estos IDEs no permiten guiones en nombres de sketch: `mi sketch.ino` → `mi_sketch.ino`.
 
+Para archivos `.h` y `.cpp` (C++), el nombre se convierte a PascalCase (camelCase con la primera letra mayúscula), siguiendo la convención de nombrar estos archivos como la clase que contienen. Se respetan las mayúsculas internas existentes: `boton.cpp` → `Boton.cpp`, `sensor de luz.h` → `SensorDeLuz.h`, `sensorLuz.cpp` → `SensorLuz.cpp`.
+
 ## Uso
 
 ```yaml

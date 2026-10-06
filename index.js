@@ -15,6 +15,8 @@ const CONVENTIONAL_NAMES = new Set([
   'notice', 'notice.md',
 ]);
 
+const PASCAL_CASE_EXTS = new Set(['.h', '.cpp']);
+
 function isIgnored(name) {
   return name.startsWith('.') || IGNORED_DIR_NAMES.has(name);
 }
@@ -41,13 +43,29 @@ function slugify(str, separator = '-') {
     .replace(/^[-_]+|[-_]+$/g, '');
 }
 
+function pascalCase(str) {
+  return str
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .split(/[^A-Za-z0-9]+/)
+    .filter(Boolean)
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join('');
+}
+
 function normalizeName(filename) {
   if (CONVENTIONAL_NAMES.has(filename.toLowerCase())) return filename;
 
   const ext = path.extname(filename);
-  const separator = ['.ino', '.pde'].includes(ext.toLowerCase()) ? '_' : '-';
+  const extLower = ext.toLowerCase();
   const base = ext ? filename.slice(0, -ext.length) : filename;
-  const fixedBase = slugify(base, separator) || 'archivo';
+  let fixedBase;
+  if (PASCAL_CASE_EXTS.has(extLower)) {
+    fixedBase = pascalCase(base) || 'Archivo';
+  } else {
+    const separator = ['.ino', '.pde'].includes(extLower) ? '_' : '-';
+    fixedBase = slugify(base, separator) || 'archivo';
+  }
   const fixedExt = ext ? '.' + slugify(ext.slice(1)) : '';
   return fixedBase + fixedExt;
 }
