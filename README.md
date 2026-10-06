@@ -14,11 +14,13 @@ Para cada archivo del repositorio (sin contar archivos/carpetas ocultos ni `node
 
 Si el nombre normalizado difiere del original, se considera un archivo a corregir. Cuando dos o más archivos de una misma carpeta terminarían con el mismo nombre normalizado (por ejemplo `café.jpg` y `cafe.jpg`), ese renombrado se omite y se reporta como conflicto en vez de sobrescribir un archivo existente.
 
-Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `AUTHORS.md` y `NOTICE.md` (sin distinguir mayúsculas/minúsculas), que se dejan con su nombre original.
+Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `AUTHORS.md`, `NOTICE.md` y `main.cpp` (sin distinguir mayúsculas/minúsculas), que se dejan con su nombre original.
 
 Para archivos `.ino` (sketches de Arduino) y `.pde` (sketches de Processing), los espacios y símbolos se reemplazan por guiones bajos (`_`) en vez de guiones (`-`), ya que estos IDEs no permiten guiones en nombres de sketch: `mi sketch.ino` → `mi_sketch.ino`.
 
 Para archivos `.h` y `.cpp` (C++), el nombre se convierte a PascalCase (camelCase con la primera letra mayúscula), siguiendo la convención de nombrar estos archivos como la clase que contienen. Se respetan las mayúsculas internas existentes: `boton.cpp` → `Boton.cpp`, `sensor de luz.h` → `SensorDeLuz.h`, `sensorLuz.cpp` → `SensorLuz.cpp`.
+
+Cuando se renombra un archivo, también se actualizan las líneas `#include "..."` que lo nombran en los archivos `.ino`, `.h`, `.hpp`, `.c` y `.cpp` de la misma carpeta, para que el código siga compilando: si `boton.h` pasa a `Boton.h`, `#include "boton.h"` pasa a `#include "Boton.h"`. Solo se consideran includes con comillas y sin rutas (no `#include <...>` ni `#include "carpeta/archivo.h"`).
 
 ## Uso
 
