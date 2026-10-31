@@ -16,6 +16,8 @@ Si el nombre normalizado difiere del original, se considera un archivo a corregi
 
 Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `AUTHORS.md`, `NOTICE.md` y `main.cpp` (sin distinguir mayúsculas/minúsculas), que se dejan con su nombre original.
 
+`CMakeLists.txt` (usado por CMake, por ejemplo en proyectos de Raspberry Pi Pico) siempre se deja con exactamente esas mayúsculas, ya que CMake no lo encuentra con otro nombre en sistemas que distinguen mayúsculas/minúsculas. Si quedó en minúsculas, se repara: `cmakelists.txt` → `CMakeLists.txt`.
+
 Para archivos `.ino` (sketches de Arduino) y `.pde` (sketches de Processing), los espacios y símbolos se reemplazan por guiones bajos (`_`) en vez de guiones (`-`), ya que estos IDEs no permiten guiones en nombres de sketch: `mi sketch.ino` → `mi_sketch.ino`.
 
 En las extensiones se usan guiones bajos (`_`) en vez de guiones (`-`), para respetar formatos como los de KiCad (`.kicad_pcb`, `.kicad_sch`, `.kicad_pro`, `.kicad_prl`, `.kicad_sym`, `.kicad_mod`). Esto también repara extensiones que quedaron con guion: `placa.kicad-pcb` → `placa.kicad_pcb`.
@@ -73,7 +75,7 @@ jobs:
 
       - name: Ejecutar action
         id: nombres
-        uses: piruetasxyz/arreglador-nombres-archivos@v0.2.6
+        uses: piruetasxyz/arreglador-nombres-archivos@v0.2.7
         with:
           arreglar: true
 

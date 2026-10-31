@@ -27573,6 +27573,11 @@ const CONVENTIONAL_NAMES = new Set([
   'main.cpp',
 ]);
 
+// nombres que deben tener exactamente estas mayúsculas para que sus herramientas los encuentren
+const CANONICAL_NAMES = new Map([
+  ['cmakelists.txt', 'CMakeLists.txt'],
+]);
+
 const PASCAL_CASE_EXTS = new Set(['.h', '.cpp']);
 
 const INCLUDE_SOURCE_EXTS = new Set(['.ino', '.h', '.hpp', '.c', '.cpp']);
@@ -27616,6 +27621,8 @@ function pascalCase(str) {
 }
 
 function normalizeName(filename) {
+  const canonical = CANONICAL_NAMES.get(filename.toLowerCase());
+  if (canonical) return canonical;
   if (CONVENTIONAL_NAMES.has(filename.toLowerCase())) return filename;
 
   const ext = path.extname(filename);
