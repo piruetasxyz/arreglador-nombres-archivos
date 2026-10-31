@@ -18,6 +18,8 @@ Se exceptúan de estas reglas archivos convencionales como `README.md`, `LICENSE
 
 Para archivos `.ino` (sketches de Arduino) y `.pde` (sketches de Processing), los espacios y símbolos se reemplazan por guiones bajos (`_`) en vez de guiones (`-`), ya que estos IDEs no permiten guiones en nombres de sketch: `mi sketch.ino` → `mi_sketch.ino`.
 
+En las extensiones se usan guiones bajos (`_`) en vez de guiones (`-`), para respetar formatos como los de KiCad (`.kicad_pcb`, `.kicad_sch`, `.kicad_pro`, `.kicad_prl`, `.kicad_sym`, `.kicad_mod`). Esto también repara extensiones que quedaron con guion: `placa.kicad-pcb` → `placa.kicad_pcb`.
+
 Para archivos `.h` y `.cpp` (C++), el nombre se convierte a PascalCase (camelCase con la primera letra mayúscula), siguiendo la convención de nombrar estos archivos como la clase que contienen. Se respetan las mayúsculas internas existentes: `boton.cpp` → `Boton.cpp`, `sensor de luz.h` → `SensorDeLuz.h`, `sensorLuz.cpp` → `SensorLuz.cpp`.
 
 Cuando se renombra un archivo, también se actualizan las líneas `#include "..."` que lo nombran en los archivos `.ino`, `.h`, `.hpp`, `.c` y `.cpp` de la misma carpeta, para que el código siga compilando: si `boton.h` pasa a `Boton.h`, `#include "boton.h"` pasa a `#include "Boton.h"`. Solo se consideran includes con comillas y sin rutas (no `#include <...>` ni `#include "carpeta/archivo.h"`).
@@ -71,7 +73,7 @@ jobs:
 
       - name: Ejecutar action
         id: nombres
-        uses: piruetasxyz/arreglador-nombres-archivos@v0.2.2
+        uses: piruetasxyz/arreglador-nombres-archivos@v0.2.6
         with:
           arreglar: true
 

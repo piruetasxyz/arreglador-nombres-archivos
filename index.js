@@ -71,7 +71,8 @@ function normalizeName(filename) {
     const separator = ['.ino', '.pde'].includes(extLower) ? '_' : '-';
     fixedBase = slugify(base, separator) || 'archivo';
   }
-  const fixedExt = ext ? '.' + slugify(ext.slice(1)) : '';
+  // las extensiones usan '_' para no romper formatos como .kicad_pcb o .kicad_sch
+  const fixedExt = ext ? '.' + slugify(ext.slice(1), '_') : '';
   return fixedBase + fixedExt;
 }
 
